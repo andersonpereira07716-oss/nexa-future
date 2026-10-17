@@ -16,10 +16,8 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar Java (JDK 17) e Bubblewrap
+      - name: Instalar Bubblewrap CLI
         run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk
           npm install -g @bubblewrap/cli
 
       - name: Criar Configuração TWA Automática
@@ -42,8 +40,8 @@ jobs:
 
       - name: Compilar o APK
         run: |
-          # O comando echo "y" responde automaticamente a qualquer prompt interativo do bubblewrap
-          echo "y" | bubblewrap build --manifest=twa-manifest.json
+          # O comando 'yes' responde 'y' a todos os prompts interativos (JDK e Android SDK) automaticamente
+          yes | bubblewrap build --manifest=twa-manifest.json
 
       - name: Guardar o APK Gerado
         uses: actions/upload-artifact@v4

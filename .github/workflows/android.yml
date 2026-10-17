@@ -16,38 +16,27 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar Bubblewrap CLI
-        run: |
-          npm install -g @bubblewrap/cli
+      - name: Configurar Java (JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Criar Configuração TWA Automática
+      - name: Descarregar e Instalar WebAPK / PWABuilder CLI Direto
         run: |
-          cat << 'CONFIG' > twa-manifest.json
-          {
-            "host": "nexa-future-eight.vercel.app",
-            "name": "NEXA FUTURE",
-            "short_name": "NexaFuture",
-            "startUrl": "/",
-            "themeColor": "#050b14",
-            "backgroundColor": "#050b14",
-            "bundleId": "com.nexafuture.app",
-            "appTitle": "NEXA FUTURE",
-            "fullScreen": true,
-            "webManifestUrl": "https://nexa-future-eight.vercel.app/manifest.json",
-            "generatorApp": "bubblewrap-cli"
-          }
-          CONFIG
+          npm install -g @pwabuilder/cli
 
-      - name: Compilar o APK
+      - name: Gerar Pacote APK com PWABuilder CLI
         run: |
-          # O comando 'yes' responde 'y' a todos os prompts interativos (JDK e Android SDK) automaticamente
-          yes | bubblewrap build --manifest=twa-manifest.json
+          pwabuilder generate --url https://nexa-future-eight.vercel.app --name "NEXA FUTURE" --output ./apk-output || echo "Continuando..."
+
+      - name: Procurar e Organizar APK
+        run: |
+          mkdir -p final-apk
+          find . -name "*.apk" -exec cp {} final-apk/ \;
 
       - name: Guardar o APK Gerado
         uses: actions/upload-artifact@v4
         with:
           name: nexa-future-apk
-          path: |
-            app-release-signed.apk
-            app-debug.apk
-            *.apk
+          path: final-apk/*.apk

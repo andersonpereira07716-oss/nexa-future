@@ -1,0 +1,36 @@
+name: Gerar APK PWA
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar Bubblewrap CLI
+        run: npm install -g @bubblewrap/cli
+
+      - name: Inicializar Projeto Android
+        run: |
+          # Gera o projeto Android a partir do teu site na Vercel
+          bubblewrap init --manifest=https://nexa-future-eight.vercel.app/manifest.json --directory=android-app -unattended
+
+      - name: Construir o APK
+        run: |
+          cd android-app
+          bubblewrap build
+
+      - name: Guardar o APK gerado
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexa-future-apk
+          path: android-app/*.apk

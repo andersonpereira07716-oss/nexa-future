@@ -16,23 +16,39 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar Bubblewrap CLI
-        run: npm install -g @bubblewrap/cli
-
-      - name: Inicializar Projeto Android Automaticamente
+      - name: Instalar Java (JDK 17) e Bubblewrap
         run: |
-          # Responde 'yes' automaticamente usando yes ou passando argumentos non-interactive se suportado, 
-          # ou instalando o JDK manualmente antes.
-          sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
-          yes "" | bubblewrap init --manifest=https://nexa-future-eight.vercel.app/manifest.json --directory=android-app
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk
+          npm install -g @bubblewrap/cli
 
-      - name: Construir o APK
+      - name: Criar Configuração TWA Automática
         run: |
-          cd android-app
-          bubblewrap build
+          cat << 'CONFIG' > twa-manifest.json
+          {
+            "host": "nexa-future-eight.vercel.app",
+            "name": "NEXA FUTURE",
+            "short_name": "NexaFuture",
+            "startUrl": "/",
+            "themeColor": "#050b14",
+            "backgroundColor": "#050b14",
+            "bundleId": "com.nexafuture.app",
+            "appTitle": "NEXA FUTURE",
+            "fullScreen": true,
+            "webManifestUrl": "https://nexa-future-eight.vercel.app/manifest.json",
+            "generatorApp": "bubblewrap-cli"
+          }
+          CONFIG
 
-      - name: Guardar o APK gerado
+      - name: Compilar o APK
+        run: |
+          bubblewrap build --manifest=twa-manifest.json
+
+      - name: Guardar o APK Gerado
         uses: actions/upload-artifact@v4
         with:
           name: nexa-future-apk
-          path: android-app/*.apk
+          path: |
+            app-release-signed.apk
+            app-debug.apk
+            *.apk

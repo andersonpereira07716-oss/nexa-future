@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXA FUTURE</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <style>
+    body { font-family: sans-serif; background: #0f172a; color: #f8fafc; text-align: center; padding-top: 50px; }
+    h1 { color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <h1>NEXA FUTURE - Ecossistema Ativo</h1>
+  <p>ZENTRIX e agentes online operando em segundo plano.</p>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('Service Worker registado com sucesso!'))
+        .catch((err) => console.log('Erro ao registar Service Worker:', err));
+    }
+  </script>
+</body>
+</html>

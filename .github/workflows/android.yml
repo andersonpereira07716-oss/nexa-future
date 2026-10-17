@@ -19,10 +19,12 @@ jobs:
       - name: Instalar Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Inicializar Projeto Android
+      - name: Inicializar Projeto Android Automaticamente
         run: |
-          # Gera o projeto Android a partir do teu site na Vercel
-          bubblewrap init --manifest=https://nexa-future-eight.vercel.app/manifest.json --directory=android-app -unattended
+          # Responde 'yes' automaticamente usando yes ou passando argumentos non-interactive se suportado, 
+          # ou instalando o JDK manualmente antes.
+          sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
+          yes "" | bubblewrap init --manifest=https://nexa-future-eight.vercel.app/manifest.json --directory=android-app
 
       - name: Construir o APK
         run: |

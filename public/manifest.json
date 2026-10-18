@@ -1,26 +1,39 @@
 {
-  "id": "/",
-  "name": "NEXA FUTURE - AI Ecosystem",
+  "name": "NexaFuture",
   "short_name": "NexaFuture",
   "description": "Painel de Controlo e Operações Multi-Agente NEXA FUTURE",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "background_color": "#050b14",
-  "theme_color": "#050b14",
-  "orientation": "portrait",
+  "background_color": "#090d16",
+  "theme_color": "#00d2ff",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Painel Principal NexaFuture"
+    },
+    {
+      "src": "/screenshots/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Interface Mobile"
     }
   ]
 }

@@ -2,38 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/core/zentrix.js",
-      "use": "@vercel/node"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "src/core/zentrix.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/manifest.webmanifest",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/manifest+json"
-        }
-      ]
+      "handle": "filesystem"
     },
     {
-      "source": "/sw.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        },
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

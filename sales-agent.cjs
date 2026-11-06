@@ -2,40 +2,91 @@
 const http = require('http');
 
 const prospects = [
-  { setor: 'Supermercados', contato: 'Gerente Comercial', oferta: 'Landing Page de Ofertas da Semana + WhatsApp' },
-  { setor: 'Barbearias', contato: 'Proprietário', oferta: 'Sistema de Agendamento Online + Pix Automatizado (VYTRON)' },
-  { setor: 'Consultórios / Clínicas', contato: 'Recepção', oferta: 'Chatbot de Triagem e Confirmação de Consultas' }
+  { 
+    setor: 'Supermercados', 
+    contato: 'Gerente / Proprietário', 
+    oferta: 'Landing Page de Ofertas da Semana + Bot WhatsApp de Encarte Digital' 
+  },
+  { 
+    setor: 'Barbearias / Salões de Beleza', 
+    contato: 'Proprietário', 
+    oferta: 'Sistema de Agendamento Online + Recebimento Pix Automatizado (VYTRON)' 
+  },
+  { 
+    setor: 'Consultórios / Clínicas', 
+    contato: 'Recepção / Gestor', 
+    oferta: 'Chatbot de Triagem e Confirmação Automática de Consultas' 
+  },
+  { 
+    setor: 'Imobiliárias / Corretores de Imóveis', 
+    contato: 'Corretor / Diretor Comercial', 
+    oferta: 'Catálogo Digital Responsivo + Captação Ativa de Leads para Imóveis' 
+  },
+  { 
+    setor: 'Academias & Consultoria Fitness', 
+    contato: 'Dono / Personal Trainer', 
+    oferta: 'Página de Matrículas / Planos Online com Checkout Pix Integrado' 
+  },
+  { 
+    setor: 'Consultoria de Licitações / Banners Públicos', 
+    contato: 'Consultor / Escritório', 
+    oferta: 'Painel de Monitoramento de Editais e Divulgação Corporativa' 
+  },
+  { 
+    setor: 'Lojas de Varejo & Variedades', 
+    contato: 'Lojista', 
+    oferta: 'Vitrine Virtual Mobile-First (ZapVitrine) para Catálogo no WhatsApp' 
+  },
+  { 
+    setor: 'Restaurantes & Gastronomia', 
+    contato: 'Gerente de Operações', 
+    oferta: 'Cardápio Digital Interativo sem Taxas de Plataforma de Delivery' 
+  }
 ];
 
 function gerarScriptAbordagem(prospect) {
   return `
 ==================================================
-🎯 PROSPECÇÃO ATIVA - SETOR: ${prospect.setor.toUpperCase()}
+🎯 PROSPECÇÃO ATIVA [QUANTIX / GAMORA]
+📍 SETOR: ${prospect.setor.toUpperCase()}
 ==================================================
-Olá! Notiiquei que o seu negócio em Patos/PB pode escalar digitalmente.
-Nós da NEXA Future criamos soluções sob medida: ${prospect.oferta}.
-Sem mensalidades abusivas e com entrega rápida. Vamos fechar essa parceria?
+Olá! Notei a forte presença do seu negócio aqui na região de Patos/PB e identifiquei uma oportunidade para otimizar sua captação de clientes.
+
+Nós da NEXA Future desenvolvemos a seguinte solução sob medida:
+👉 ${prospect.oferta}
+
+✅ Sem mensalidades abusivas de terceiros
+✅ Entrega rápida e layout 100% otimizado para celulares
+✅ Sistema com blindagem de segurança e recebimento instantâneo via Pix
+
+Podemos agendar uma demonstração rápida de 5 minutos hoje no WhatsApp?
 ==================================================
   `;
 }
 
-console.log('[GAMORA] Iniciando varredura de prospecção comercial...');
+console.log('--------------------------------------------------');
+console.log('[GAMORA & QUANTIX] Varredura comercial expandida!');
+console.log(`[SYS] ${prospects.length} Nichos estratégicos calibrados.`);
+console.log('--------------------------------------------------');
+
 prospects.forEach((p, index) => {
-  console.log(`\n[Lead #${index + 1}] Setor: ${p.setor} | Oferta: ${p.oferta}`);
+  console.log(`\n[Lead #${index + 1}] Setor: ${p.setor}`);
+  console.log(`[Público]: ${p.contato}`);
   console.log(gerarScriptAbordagem(p));
 });
 
-// Servidor simples para API de Vendas
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify({
     status: 'ONLINE',
-    agente: 'GAMORA / QUANTIX',
-    mensagem: 'Funil de prospecção ativo e pronto para capturar clientes locais!',
-    leadsAtivos: prospects.length
+    agentes: ['GAMORA', 'QUANTIX'],
+    mensagem: 'Funil de prospecção expandido e operando com 8 nichos estratégicos.',
+    leadsAtivos: prospects.length,
+    timestamp: new Date().toISOString()
   }));
 });
 
-server.listen(4000, () => {
-  console.log('[SYS] Módulo de Vendas rodando na porta 4000.');
+const PORT = 4000;
+server.listen(PORT, () => {
+  console.log(`\n[SYS] Módulo de Vendas ativo na porta ${PORT}.`);
 });

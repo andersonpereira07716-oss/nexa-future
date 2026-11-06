@@ -274,9 +274,7 @@ export default function App() {
     <div className="min-h-screen bg-[#070C18] text-slate-100 font-sans flex flex-col selection:bg-cyan-500 selection:text-black">
       <header className="border-b border-slate-800 bg-[#0B132B]/90 backdrop-blur sticky top-0 z-40 px-4 py-3 flex items-center justify-between shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Lock className="w-5 h-5 text-slate-950 font-bold" />
-          </div>
+          <div className="w-10 h-10 rounded-xl overflow-hidden border border-emerald-500/40 shadow-lg shadow-emerald-500/20 flex items-center justify-center bg-slate-900"><img src="/images/logo.png" alt="APS Tech" className="w-full h-full object-cover" /></div>
           <div>
             <h1 className="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400">
               NEXA FUTURE <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">NOTA 10</span>
